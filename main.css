@@ -1,0 +1,120 @@
+#cards {
+  display: flex;
+  flex-wrap: wrap; /* 換行 */
+  width: 85%; /* 新增：寬度和標頭一致 */
+  margin: 0 auto; /* 新增：置中 */
+}
+
+.card {
+  /* 卡片在 #cards 容器裡的排版 */
+  flex: 7% 1 1; /* 每個 item 分配容器寬度 */
+  /* flex 是縮寫，依序代表： 
+    flex-basis: 7%; => 分配寬度，即控制 item 在容器裡佔的寬度
+    flex-grow: 1; => 分配剩餘空間
+    flex-shrink: 1; => 空間不足如何收縮，若視窗變小，flex item 就需要收縮，減少自己所佔的空間 */ 
+  height: 8vw; /* 因為寬度是視窗寬度的 7%，會依照視窗大小變化，所以高度也根據視窗的寬度等比例變化 */
+  border: 2px solid #e0e0e0;
+  margin: 2px;
+  box-sizing: border-box;
+
+  /* 卡片內部元素的排版 */
+  display: flex;
+  /* flex 原始軸是 row (橫向排列)，因此要利用 flex-direction 改變軸的方向，變成 column（直向排列） */
+  flex-direction: column;
+  /* 利用 justify-content: space-around 讓卡片內部元素沿著(直向)軸分散排列，看起來就是數字和圖片會上下分散開來 */
+  justify-content: space-around;
+}
+
+.card img {
+  max-width: 30%;
+  /* 利用 align-self: center 讓圖片沿著cross axis(橫向)置中排列，所以圖片就能放在卡片的正中心了 */
+  align-self: center;
+}
+
+.card p {
+  margin: 3px;
+  font-size: 10px;
+}
+
+/* 「:last-child」指的是在同一階層的同類元素中，選出最後面的元素。因此「.card p:last-child」即是「在 .card 裡的最後一個 p 元素」 */
+.card p:last-child {
+  transform: rotate(180deg);
+}
+
+.back {
+  background: url('https://assets-lighthouse.alphacamp.co/uploads/image/file/9222/ExportedContentImage_00.png');
+  background-size: cover;
+}
+
+.paired {
+  background-color: #dae0e3;
+}
+
+#header {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 85%;
+}
+
+#header .title {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#header .title img {
+  max-width: 3em;
+}
+
+#header .title h2 {
+  padding-left: 0.5em;
+}
+
+#header .score {
+  margin: 0;
+  color: #6c90ac;
+}
+
+#header .tried {
+  margin-top: 0;
+}
+
+.wrong {
+  animation-name: wrongAnimation;
+  animation-duration: 0.2s; /* 持續 0.2 秒 */
+  animation-iteration-count: 5; /* 重複 5 次 */
+}
+
+/* @keyframes(關鍵影格)：可用來設定動畫(wrongAnimation)的漸變流程，在 keyframes 裡可以用 from 和 to 來指定動畫漸變起點/終點 */
+@keyframes wrongAnimation {
+  to {
+    border: 2px solid #ffd54f;
+  }
+}
+
+/** Game finished **/
+.completed {
+  position: absolute;
+  z-index: 999;
+  top: 25vh;
+  background-color: #7983f561;
+  width: 100vw;
+  padding: 100px 0;
+}
+
+.completed>p {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: rgb(43, 3, 91);
+  text-align: center;
+  margin: 0;
+}
+
+.completed>p:first-child {
+  font-size: 3em;
+  font-weight: 700;
+  color: #2b33df;
+  text-shadow: 0.05em 0.05em #7a6ce89e
+}
